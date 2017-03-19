@@ -24,13 +24,14 @@ LIMIT 20");
 
 elseif($flag == 'loadInfractions') {
   $student_id = $_POST["student_id"];
-  $result = mysqli_query($connect, "SELECT i.infraction_description AS  'Infraction_Description', a.action_on_infraction_description AS  'Action_Taken', d.date_field AS  'Date', CONCAT( t.hour_range, ' ', t.hour_type ) AS  'Time'
+  $result = mysqli_query($connect, "SELECT i.infraction_description AS  'Infraction_Description', a.action_on_infraction_description AS  'Action_Taken', d.date_field AS  'Date', CONCAT( t.hour_range,  ' ', t.hour_type ) AS  'Time', incident_location_description AS  'Location'
 FROM odrs o
 JOIN infraction i ON i.id = o.infraction_id
 JOIN dim_date d ON d.date_id = o.incident_date_id
-JOIN dim_time t ON o.incident_time_id = t.time_id
-JOIN action_on_infraction a ON o.action_on_infraction_id = a.id
-WHERE student_id=$student_id");
+JOIN dim_time t ON t.time_id = o.incident_time_id
+JOIN action_on_infraction a ON a.id = o.action_on_infraction_id
+JOIN incident_location l ON l.id = o.incident_location_id
+WHERE student_id =$student_id");
   $data = array();
   while ($row = mysqli_fetch_array($result)) {
     $data[] = $row;

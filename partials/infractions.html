@@ -1,0 +1,66 @@
+<section>
+  <div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+      <h4>Label</h4>
+      <span class="text-muted">Something else</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+      <h4>Label</h4>
+      <span class="text-muted">Something else</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+      <h4>Label</h4>
+      <span class="text-muted">Something else</span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder">
+      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+      <h4>Label</h4>
+      <span class="text-muted">Something else</span>
+    </div>
+  </div>
+
+  <h2 class="sub-header">Section title</h2>
+  <div class="table-responsive">
+    <table class="table table-striped" id="schoolSummaryTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Infractions Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="student in students">
+          <td>{{student.student_id}}</td>
+          <td>{{student.student_first_name}}</td>
+          <td>{{student.student_last_name}}</td>
+          <td>{{student.infractions_count}}</td>
+          <td><button id="inf" type="button" class="btn btn-danger pull-right" ng-click="scrollDown();loadInfractions(student.student_id,student.student_first_name,student.student_last_name)">View Infractions</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-striped" id="infractionsTable" ng-show="infractionsFlagCount">
+      <caption><h2>Infraction Details of {{studentName}}</h2><button type="button" class="btn btn-danger pull-right" ng-click="infractionsFlagCount=false">Close</button></caption>
+      <thead>
+        <tr>
+          <th>Infraction Description</th>
+          <th>Action Taken</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tr ng-repeat="infraction in infractions">
+        <td>{{infraction.Infraction_Description}}</td>
+        <td>{{infraction.Action_Taken}}</td>
+        <td>{{infraction.Date}}</td>
+        <td>{{infraction.Time}}</td>
+        <td>{{infraction.Location}}</td>
+      </tr>
+    </table>
+  </div>
+</section>

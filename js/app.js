@@ -1,16 +1,20 @@
-var dashboardApp = angular.module('DashboardApp',[])
+var dashboardApp = angular.module('DashboardApp',['ngRoute'])
+
+  .config(['$routeProvider', '$locationProvider', function($routeProvider,$locationProvider){
+    $locationProvider.hashPrefix('');
+    $routeProvider
+      .when('/infractions',{
+        templateUrl: 'partials/infractions.html'
+      }).when('/frontpage',{
+        templateUrl: 'partials/frontpage.html'
+      });
+  }])
+
   .controller('MyDashboard',['$scope','$http',function($scope,$http){
     console.log('In Dashboard Controller');
     $scope.school_name = "";
     $scope.dd = false;
     $scope.infractionsFlagCount = false;
-
-    $("#inf").click(function() {
-      console.log('Hi');
-      $('html,body').animate({
-        scrollTop: $("#infractionsTable").offset().top},
-        'slow');
-    });
 
     var loadInfractions = function(id, firstName, lastName) {
       $scope.studentName = firstName + ' ' + lastName;
@@ -29,27 +33,10 @@ var dashboardApp = angular.module('DashboardApp',[])
       },function(error){
         console.log("Error: ", error);
       });
-
-      // var data = $.param({
-      //   flag: 'loadInfractions',
-      //   student_id: '1024655'
-      // });
-      //
-      // var config = {
-      //   headers: {
-      //     'Content-type': 'application/x-www-form-urlencoded;charset=utf-8;'
-      //   }
-      // }
-      //
-      // $http.post('php/midware.php',data,config).then(function (data, status, headers, config) {
-      //   console.log(data);
-      // })
-
     }
     $scope.loadInfractions = loadInfractions;
 
     $http.get('php/midware.php?flag=populateStudentDetails').then(function(response) {
       $scope.students = response.data;
     });
-
   }]);
